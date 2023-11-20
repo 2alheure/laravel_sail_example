@@ -1,0 +1,1 @@
+Coucou ! Ceci est un test avec une variable qui contient "{{ $variable }}"
