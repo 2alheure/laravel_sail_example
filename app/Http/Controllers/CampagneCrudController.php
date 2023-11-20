@@ -41,6 +41,7 @@ class CampagneCrudController extends Controller {
 
     function delete(Campagne $campagne) {
         $campagne->delete();
+        Storage::disk('emails_campagne')->delete($campagne->slug . '.blade.php');
         return redirect()->route('campagne.liste');
     }
 }
