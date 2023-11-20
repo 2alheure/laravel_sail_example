@@ -3,18 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Campagne;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\CampagneRequest;
+use Illuminate\Support\Facades\Storage;
 
 class CampagneCrudController extends Controller {
 
-    function create(Campagne $campagne, Request $request) {
-        $validated = $request->validate([
-            'nom' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:campagne,slug'
+    function create(Campagne $campagne, CampagneRequest $request) {
+        $campagne = Campagne::create([
+            'nom' => $request->validated['nom'],
+            'slug' => uniqid() . '-' . Str::slug($request->validated['nom']),
         ]);
 
-        Campagne::insert($validated);
+        Storage::disk('emails_campagne')->put($campagne->slug . '.blade.php', 'Please write into this file.');
+
         return redirect()->route('campagne.liste');
     }
 
@@ -31,13 +34,8 @@ class CampagneCrudController extends Controller {
         ]);
     }
 
-    function update(Campagne $campagne, Request $request) {
-        $validated = $request->validate([
-            'nom' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:campagne,slug,' . $campagne->id
-        ]);
-
-        $campagne->update($validated);
+    function update(Campagne $campagne, CampagneRequest $request) {
+        $campagne->update($request->validated);
         return redirect()->route('campagne.liste');
     }
 

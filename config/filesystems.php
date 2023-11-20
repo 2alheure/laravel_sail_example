@@ -36,6 +36,12 @@ return [
             'throw' => false,
         ],
 
+        'emails_campagne' => [
+            'driver' => 'local',
+            'root' => resource_path('views/campagne/emails'),
+            'throw' => false,
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
