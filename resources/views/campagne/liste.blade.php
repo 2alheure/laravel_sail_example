@@ -2,11 +2,13 @@
 
 @section('body')
 
+@can('admin')
 <p class="text-center my-8">
     <a href="{{ route('campagne.create') }}" class="rounded p-4 bg-green-500 text-white">
         <i class="fa fa-plus mr-2" aria-hidden="true"></i> Créer une campagne
     </a>
 </p>
+@endcan
 
 <table class="w-full">
     <thead>
@@ -33,22 +35,27 @@
                     <i class="fa fa-eye" aria-hidden="true"></i>
                 </a>
 
+                @can('admin')
                 <a class="py-2 px-4 rounded bg-yellow-500 text-white" href="{{ route('campagne.update', ['campagne' => $c]) }}" title="Modifier">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                 </a>
 
                 <a class="py-2 px-4 rounded bg-red-500 text-white" href="{{ route('campagne.delete', ['campagne' => $c]) }}" onclick="return confirm('Êtes-vous sûr ?')" title="Supprimer">
-                <i class="fa fa-trash" aria-hidden="true"></i>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
                 </a>
+                @endcan
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
 
+@can('admin')
 <p class="text-center my-8">
     <a href="{{ route('campagne.create') }}" class="rounded p-4 bg-green-500 text-white">
         <i class="fa fa-plus mr-2" aria-hidden="true"></i> Créer une campagne
     </a>
 </p>
+@endcan
+
 @endsection

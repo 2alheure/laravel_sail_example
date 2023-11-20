@@ -23,13 +23,13 @@ Route::get('/', function () {
 
 Route::get('/test', [TestController::class, 'test'])->name('test');
 
-Route::get('/campagnes/create', [CampagneCrudController::class, 'form'])->name('campagne.create');
-Route::post('/campagnes/create', [CampagneCrudController::class, 'create'])->name('campagne.createHandle');
+Route::get('/campagnes/create', [CampagneCrudController::class, 'form'])->name('campagne.create')->can('admin');
+Route::post('/campagnes/create', [CampagneCrudController::class, 'create'])->name('campagne.createHandle')->can('admin');
 Route::get('/campagnes', [CampagneCrudController::class, 'read'])->name('campagne.liste');
 Route::get('/campagnes/{campagne}', [CampagneCrudController::class, 'read'])->name('campagne.details');
-Route::get('/campagnes/{campagne}/update', [CampagneCrudController::class, 'form'])->name('campagne.update');
-Route::post('/campagnes/{campagne}/update', [CampagneCrudController::class, 'update'])->name('campagne.updateHandle');
-Route::get('/campagnes/{campagne}/delete', [CampagneCrudController::class, 'delete'])->name('campagne.delete');
+Route::get('/campagnes/{campagne}/update', [CampagneCrudController::class, 'form'])->name('campagne.update')->can('admin');
+Route::post('/campagnes/{campagne}/update', [CampagneCrudController::class, 'update'])->name('campagne.updateHandle')->can('admin');
+Route::get('/campagnes/{campagne}/delete', [CampagneCrudController::class, 'delete'])->name('campagne.delete')->can('admin');
 
 Route::get('/campagnes/{campagne}/subscribe', [SouscriptionController::class, 'subscriptionForm'])->name('campagne.subscribe');
 Route::post('/campagnes/{campagne}/subscribe', [SouscriptionController::class, 'subscribe'])->name('campagne.subscribe');

@@ -25,7 +25,10 @@
     <thead>
         <tr>
             <th>Email</th>
+            
+            @can('admin')
             <th></th>
+            @endcan
         </tr>
     </thead>
 
@@ -35,9 +38,12 @@
             <td>
                 <a href="mailto:{{ $s->email }}">{{ $s->email }}</a>
             </td>
+
+            @can('admin')
             <td>
                 <a class="bg-red-500 text-white rounded ml-2 p-1" href="{{ route('campagne.unsubscribe', ['campagne' => $campagne, 'token' => $s->token]) }}" title="Désinscrire">&times;</a>
             </td>
+            @endcan
         </tr>
         @endforeach
     </tbody>
