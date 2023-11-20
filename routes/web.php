@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CampagneCrudController;
+use App\Http\Controllers\SouscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +20,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/test', [TestController::class, 'test'])->name('test');
+
+Route::get('/campagnes/create', [CampagneCrudController::class, 'form'])->name('campagne.create');
+Route::post('/campagnes/create', [CampagneCrudController::class, 'create'])->name('campagne.createHandle');
+Route::get('/campagnes', [CampagneCrudController::class, 'read'])->name('campagne.liste');
+Route::get('/campagnes/{campagne}', [CampagneCrudController::class, 'read'])->name('campagne.details');
+Route::get('/campagnes/{campagne}/update', [CampagneCrudController::class, 'form'])->name('campagne.update');
+Route::post('/campagnes/{campagne}/update', [CampagneCrudController::class, 'update'])->name('campagne.updateHandle');
+Route::get('/campagnes/{campagne}/delete', [CampagneCrudController::class, 'delete'])->name('campagne.delete');
+
+Route::get('/campagnes/{campagne}/subscribe', [SouscriptionController::class, 'subscriptionForm'])->name('campagne.subscribe');
+Route::post('/campagnes/{campagne}/subscribe', [SouscriptionController::class, 'subscribe'])->name('campagne.subscribe');
+Route::get('/campagnes/{campagne}/unsubscribe/{token}', [SouscriptionController::class, 'unsubscribe'])->name('campagne.unsubscribe');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
