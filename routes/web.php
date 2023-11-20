@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\CampagneCrudController;
-use App\Http\Controllers\SouscriptionController;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,16 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', [TestController::class, 'test'])->name('test');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/campagnes/create', [CampagneCrudController::class, 'form'])->name('campagne.create');
-Route::post('/campagnes/create', [CampagneCrudController::class, 'create'])->name('campagne.createHandle');
-Route::get('/campagnes', [CampagneCrudController::class, 'read'])->name('campagne.liste');
-Route::get('/campagnes/{campagne}', [CampagneCrudController::class, 'read'])->name('campagne.details');
-Route::get('/campagnes/{campagne}/update', [CampagneCrudController::class, 'form'])->name('campagne.update');
-Route::post('/campagnes/{campagne}/update', [CampagneCrudController::class, 'update'])->name('campagne.updateHandle');
-Route::get('/campagnes/{campagne}/delete', [CampagneCrudController::class, 'delete'])->name('campagne.delete');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-Route::get('/campagnes/{campagne}/subscribe', [SouscriptionController::class, 'subscriptionForm'])->name('campagne.subscribe');
-Route::post('/campagnes/{campagne}/subscribe', [SouscriptionController::class, 'subscribe'])->name('campagne.subscribe');
-Route::get('/campagnes/{campagne}/unsubscribe/{token}', [SouscriptionController::class, 'unsubscribe'])->name('campagne.unsubscribe');
+require __DIR__.'/auth.php';
