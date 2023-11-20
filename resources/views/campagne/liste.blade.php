@@ -38,7 +38,7 @@
                 </a>
 
                 <a class="py-2 px-4 rounded bg-red-500 text-white" href="{{ route('campagne.delete', ['campagne' => $c]) }}" onclick="return confirm('Êtes-vous sûr ?')" title="Supprimer">
-                <i class="fa fa-trash" aria-hidden="true"></i>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
                 </a>
             </td>
         </tr>
