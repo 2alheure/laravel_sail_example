@@ -16,7 +16,7 @@ class CampagneCrudController extends Controller {
             'slug' => uniqid() . '-' . Str::slug($request->validated['nom']),
         ]);
 
-        Storage::disk('emails_campagne')->put($campagne->slug . '.blade.php', 'Please write into this file.');
+        Storage::disk('emails_campagne')->put($campagne->slug . '.blade.php', '@extends(\'campagne.emails._base\')' . PHP_EOL  . PHP_EOL . '@section(\'body\')' . PHP_EOL . PHP_EOL . '@endsection');
 
         return redirect()->route('campagne.liste');
     }

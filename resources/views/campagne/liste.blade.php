@@ -43,6 +43,10 @@
                 <a class="py-2 px-4 rounded bg-red-500 text-white" href="{{ route('campagne.delete', ['campagne' => $c]) }}" onclick="return confirm('Êtes-vous sûr ?')" title="Supprimer">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                 </a>
+
+                <a href="{{ route('campagne.send', ['campagne' => $c]) }}" class="py-2 px-4 rounded bg-teal-500 text-white" onclick="return confirm('Êtes-vous sûr de vouloir envoyer cette campagne à {{ $c->souscriptions->count() }} personnes ?')" title="Envoyer">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                </a>
                 @endcan
             </td>
         </tr>

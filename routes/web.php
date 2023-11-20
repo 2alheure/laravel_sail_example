@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CampagneCrudController;
+use App\Http\Controllers\SendCampagneController;
 use App\Http\Controllers\SouscriptionController;
 
 /*
@@ -34,6 +35,8 @@ Route::get('/campagnes/{campagne}/delete', [CampagneCrudController::class, 'dele
 Route::get('/campagnes/{campagne}/subscribe', [SouscriptionController::class, 'subscriptionForm'])->name('campagne.subscribe');
 Route::post('/campagnes/{campagne}/subscribe', [SouscriptionController::class, 'subscribe'])->name('campagne.subscribe');
 Route::get('/campagnes/{campagne}/unsubscribe/{token}', [SouscriptionController::class, 'unsubscribe'])->name('campagne.unsubscribe');
+
+Route::get('/campagnes/{campagne}/send', [SendCampagneController::class, 'send'])->name('campagne.send')->can('admin');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
