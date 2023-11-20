@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CampagneCrudController;
+use App\Http\Controllers\SouscriptionController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,7 @@ Route::get('/campagnes/{campagne}', [CampagneCrudController::class, 'read'])->na
 Route::get('/campagnes/{campagne}/update', [CampagneCrudController::class, 'form'])->name('campagne.update');
 Route::post('/campagnes/{campagne}/update', [CampagneCrudController::class, 'update'])->name('campagne.updateHandle');
 Route::get('/campagnes/{campagne}/delete', [CampagneCrudController::class, 'delete'])->name('campagne.delete');
+
+Route::get('/campagnes/{campagne}/subscribe', [SouscriptionController::class, 'subscriptionForm'])->name('campagne.subscribe');
+Route::post('/campagnes/{campagne}/subscribe', [SouscriptionController::class, 'subscribe'])->name('campagne.subscribe');
+Route::get('/campagnes/{campagne}/unsubscribe/{token}', [SouscriptionController::class, 'unsubscribe'])->name('campagne.unsubscribe');
