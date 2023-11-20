@@ -22,8 +22,9 @@ class CampagneCrudController extends Controller {
     }
 
     function read(Campagne $campagne = null) {
-        if (empty($campagne)) return view('campagne.liste', ['campagnes' => Campagne::all()]);
+        if (empty($campagne)) return view('campagne.liste', ['campagnes' => Campagne::with('souscriptions')->get()]);
 
+        $campagne->load('souscriptions');
         return view('campagne.details', compact('campagne'));
     }
 
